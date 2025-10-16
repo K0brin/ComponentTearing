@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -26,24 +27,39 @@ public class TurretComponent : Components
    void Update()
    {
       base.Update();
-      
-      OrientToPlayer();
+
       StartCoroutine(Shoot());
+
+      if (SeePlayer())
+      {
+         OrientToPlayer();
+      }
+      else
+      {
+         ScanArea();
+      }
    }
 
    private void OrientToPlayer()
    {
-        Debug.Log("1");
-        Quaternion orient = Quaternion.LookRotation(playerController.transform.position - transform.position);
+      Debug.Log("1");
+      Quaternion orient = Quaternion.LookRotation(playerController.transform.position - transform.position);
       //other.position - this.position; triangulates a direction to look in
       transform.rotation = orient;
-        Debug.Log("2");
+      Debug.Log("2");
    }
+
+   private void ScanArea()
+   {
+      //rotate turret 360
+      Vector3 increment = new Vector3(0, 1, 0);
+      this.transform.Rotate(Vector3.up, 1, Space.World);
+   } 
 
    private IEnumerator Shoot()
    {
       //when sees player Shoot()
-      if (GetComponentInParent<Boss>().seePlayer && canShoot)
+      if (SeePlayer() && canShoot)
       {
             canShoot = false;
             //actual shoot script

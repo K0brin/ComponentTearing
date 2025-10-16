@@ -16,7 +16,7 @@ public class FlamethrowerComponent : Components
 
     void Update()
     {
-        if (GetComponentInParent<Boss>().seePlayer && InAttackRange())
+        if (SeePlayer() && InAttackRange())
         {
             StartAttack();
         }
@@ -44,8 +44,9 @@ public class FlamethrowerComponent : Components
     }
 
 
-    void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(flameRange.transform.position, flameRange.transform.localScale);
     }
