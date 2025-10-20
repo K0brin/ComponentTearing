@@ -270,6 +270,7 @@ MonoBehaviour:
   bulletObject: {fileID: 179662837358060377, guid: 93143bd621b99374b8a36ff9cae77510, type: 3}
   barrelTip: {fileID: 6579811698867060452}
   fireRatePerSec: 0.05
+  bulletDamage: 1
 --- !u!1 &6161310726352095042
 GameObject:
   m_ObjectHideFlags: 0

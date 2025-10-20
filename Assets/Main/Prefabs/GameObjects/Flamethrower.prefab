@@ -131,6 +131,8 @@ MonoBehaviour:
   healthSlider: {fileID: 777310275040115504}
   sightArea: {fileID: 7029088192075976143}
   flameRange: {fileID: 8553063014488602941}
+  flameDamage: 10
+  secBetweenDamage: 1
 --- !u!1 &7029088192075976143
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,19 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float health = 0;
+    [Header("Health")]
+    [SerializeField] private float currentHealth = 0;
     private float maxHealth = 100;
+    [SerializeField] private Slider healthBar;
 
     void Start()
     {
-        health = maxHealth;
-        Mathf.Clamp(health, 0f, maxHealth);
+        currentHealth = maxHealth;
+        Mathf.Clamp(currentHealth, 0f, maxHealth);
+        UpdateHealthBar();
     }
 
-    private void TakeDamage(float damageToTake)
+    public void TakeDamage(float damageToTake)
     {
-        health -= damageToTake;
-        Mathf.Clamp(health, 0f, maxHealth);
+        currentHealth -= damageToTake;
+        Mathf.Clamp(currentHealth, 0f, maxHealth);
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthBar.value = currentHealth / maxHealth;
     }
 }

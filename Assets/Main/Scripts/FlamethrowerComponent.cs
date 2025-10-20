@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FlamethrowerComponent : Components
@@ -13,12 +14,23 @@ public class FlamethrowerComponent : Components
     //meaning you can still take damage
 
     [SerializeField] private GameObject flameRange;
+    [SerializeField] private float flameDamage = 10f;
+    [SerializeField] private float secBetweenDamage = 0.5f;
+    private bool canAttack;
+
+    void Start()
+    {
+        base.Start();
+        canAttack = true;
+    }
 
     void Update()
     {
-        if (SeePlayer() && InAttackRange())
+        base.Update();
+        if (SeePlayer())
         {
-            StartAttack();
+            Debug.Log("see's player");
+            StartCoroutine(StartAttack());
         }
     }
 
@@ -36,11 +48,21 @@ public class FlamethrowerComponent : Components
         return false;
     }
 
-    private void StartAttack()
+    IEnumerator StartAttack()
     {
+        if (canAttack)
+        {
+            canAttack = false;
+            
+            //call player damage function on tic rate
+            if (InAttackRange())
+            {
+                playerController.TakeDamage(flameDamage);
+            }
+            yield return new WaitForSeconds(secBetweenDamage);
 
-
-        //call player damage function
+            canAttack = true;
+        }
     }
 
 

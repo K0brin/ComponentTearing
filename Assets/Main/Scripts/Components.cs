@@ -18,12 +18,14 @@ public class Components : MonoBehaviour
 
     [SerializeField] GameObject sightArea;
 
-    private GameObject player;
+    protected GameObject player;
+    protected PlayerController playerController;
 
 
     protected virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerController = player.GetComponent<PlayerController>();
         //set max health
         TakeDamage(-maxHealth);
     }
@@ -45,7 +47,6 @@ public class Components : MonoBehaviour
         healthSlider.value = currentHealth / maxHealth;
     }
 
-    //TODO make seeplayer a parent in components so each component has different vision
     protected virtual bool SeePlayer()
     {
         Collider[] objectsHit = Physics.OverlapBox(sightArea.transform.position, sightArea.transform.localScale / 2, Quaternion.identity);
