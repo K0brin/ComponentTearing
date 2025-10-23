@@ -20,10 +20,12 @@ public class Components : MonoBehaviour
 
     protected GameObject player;
     protected PlayerController playerController;
+    public bool showCore{ get; private set; }
 
 
     protected virtual void Start()
     {
+        showCore = false;
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         //set max health
@@ -32,7 +34,10 @@ public class Components : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        if (IsDead())
+        {
+            SupportComponentDied();
+        }
     }
 
     public virtual void TakeDamage(float damage)
@@ -67,9 +72,18 @@ public class Components : MonoBehaviour
         return false;
     }
 
-    protected virtual void SupportComponentDied()
+    private void SupportComponentDied()
     {
-        
+        showCore = true;
+    }
+
+    private bool IsDead()
+    {
+        if (currentHealth <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     protected virtual void OnDrawGizmos()

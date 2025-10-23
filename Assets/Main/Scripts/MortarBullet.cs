@@ -7,6 +7,7 @@ public class MortarBullet : MonoBehaviour
         if (other.CompareTag("MortarHitArea"))
         {
             Destroy(other.gameObject);
+            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
     }

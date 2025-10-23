@@ -10,16 +10,24 @@ public class CoreComponent : Components
 
     private bool coreShown;
     [SerializeField] private float openCoreTime;
+    private int numberOfDeadComponents;
 
     void Start()
     {
         base.Start();
         coreShown = false;
+        numberOfDeadComponents = 0;
     }
 
     void Update()
     {
         base.Update();
+
+        if (showCore)
+        {
+            ShowCore();
+            numberOfDeadComponents++;
+        }
 
         /*  if(other component health == 0)
       {
