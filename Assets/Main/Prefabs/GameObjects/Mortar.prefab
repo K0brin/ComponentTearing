@@ -129,6 +129,11 @@ MonoBehaviour:
   maxHealth: 100
   healthSlider: {fileID: 7102058907278373570}
   sightArea: {fileID: 4008740592164538712}
+  mortarCooldown: 10
+  bulletSpawnTime: 5
+  bulletSpeed: 20
+  hitAreaPrefab: {fileID: 8999661944706477101, guid: 210f2717e5d88b947b26a9da8eb556e6, type: 3}
+  mortarProjectile: {fileID: 179662837358060377, guid: b193d6f610b840a45af8c477de9b276b, type: 3}
 --- !u!1 &4008740592164538712
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,8 +162,8 @@ Transform:
   m_GameObject: {fileID: 4008740592164538712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8.81}
+  m_LocalScale: {x: 101.49788, y: 36.528214, z: 101.49788}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7216895106655603190}
@@ -178,7 +183,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4008740592164538712}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -233,7 +238,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -327,6 +332,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1333832465374419228, guid: 2ec87914645d18744909334778274590, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207095784889945478, guid: 2ec87914645d18744909334778274590, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2207095784889945478, guid: 2ec87914645d18744909334778274590, type: 3}

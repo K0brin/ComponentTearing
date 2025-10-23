@@ -67,6 +67,11 @@ public class Components : MonoBehaviour
         return false;
     }
 
+    protected virtual void SupportComponentDied()
+    {
+        
+    }
+
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
