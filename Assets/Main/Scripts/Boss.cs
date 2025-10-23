@@ -6,8 +6,6 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
 
-    //TODO install git ignore for library, etc so git add works
-
     [SerializeField] private GameObject core, turret, flamethrower, mortar;
     [SerializeField] private Transform coreSpawn, turretSpawn, flamethrowerSpawn, mortarSpawn;
 

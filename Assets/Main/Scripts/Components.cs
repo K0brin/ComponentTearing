@@ -20,12 +20,15 @@ public class Components : MonoBehaviour
 
     protected GameObject player;
     protected PlayerController playerController;
-    public bool showCore{ get; private set; }
+    private bool shownCore;
+    private CoreComponent coreComponent;
+    private bool invincible;
 
 
     protected virtual void Start()
     {
-        showCore = false;
+        coreComponent = GameObject.FindGameObjectWithTag("Core").GetComponent<CoreComponent>();
+        shownCore = false;
         player = GameObject.FindGameObjectWithTag("Player");
         playerController = player.GetComponent<PlayerController>();
         //set max health
@@ -34,17 +37,21 @@ public class Components : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (IsDead())
+        if (IsDead() && !shownCore)
         {
+            Debug.Log("isdead");
             SupportComponentDied();
         }
     }
 
     public virtual void TakeDamage(float damage)
     {
-        currentHealth = currentHealth - damage;
-        Mathf.Clamp(currentHealth, 0f, maxHealth);
-        UpdateHealthBar();
+        if (!invincible)
+        {
+            currentHealth = currentHealth - damage;
+            Mathf.Clamp(currentHealth, 0f, maxHealth);
+            UpdateHealthBar();
+        }
     }
 
     protected virtual void UpdateHealthBar()
@@ -74,7 +81,9 @@ public class Components : MonoBehaviour
 
     private void SupportComponentDied()
     {
-        showCore = true;
+        shownCore = true;
+        coreComponent.showCore = true;
+        Debug.Log("showCore = true");
     }
 
     private bool IsDead()
@@ -86,10 +95,15 @@ public class Components : MonoBehaviour
         return false;
     }
 
+    public virtual void Invincible(bool input)
+    {
+        invincible = input;
+    }
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(sightArea.transform.position, sightArea.transform.localScale);
     }
+
 
 }

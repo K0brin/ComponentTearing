@@ -8,6 +8,10 @@ TagManager:
   - Part
   - CinemachineTarget
   - MortarHitArea
+  - Core
+  - Flamethrower
+  - Mortar
+  - Turret
   layers:
   - Default
   - TransparentFX

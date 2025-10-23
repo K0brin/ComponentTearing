@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 1067711244207218208}
   m_Layer: 3
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: Core
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   maxHealth: 100
   healthSlider: {fileID: 4754832617254739901}
   sightArea: {fileID: 528088828065790829}
+  showCore: 0
   openCoreTime: 0
 --- !u!1001 &3895639287325118805
 PrefabInstance:

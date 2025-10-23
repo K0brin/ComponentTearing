@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4779289857391377919}
   m_Layer: 3
   m_Name: Mortar
-  m_TagString: Untagged
+  m_TagString: Mortar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   maxHealth: 100
   healthSlider: {fileID: 7102058907278373570}
   sightArea: {fileID: 4008740592164538712}
-  mortarCooldown: 10
+  mortarCooldown: 5
   bulletSpawnTime: 5
   bulletSpeed: 20
   hitAreaPrefab: {fileID: 8999661944706477101, guid: 210f2717e5d88b947b26a9da8eb556e6, type: 3}

@@ -5,43 +5,57 @@ public class CoreComponent : Components
 {
 
     //TODO as core takes damage it will slow down robot
-    //incentive to shoot core after each component rather than others
-    //other components are invincible and can't attack when core is shown
 
     private bool coreShown;
+    public bool showCore;
     [SerializeField] private float openCoreTime;
-    private int numberOfDeadComponents;
+    private int numberOfAliveComponents;
+
+    private TurretComponent turretComponent;
+    private MortarComponent mortarComponent;
+    private FlamethrowerComponent flamethrowerComponent;
 
     void Start()
     {
         base.Start();
         coreShown = false;
-        numberOfDeadComponents = 0;
+        numberOfAliveComponents = 3;
+        Invincible(true);
+
+        turretComponent = GameObject.FindGameObjectWithTag("Turret").GetComponent<TurretComponent>();
+        mortarComponent = GameObject.FindGameObjectWithTag("Mortar").GetComponent<MortarComponent>();
+        flamethrowerComponent = GameObject.FindGameObjectWithTag("Flamethrower").GetComponent<FlamethrowerComponent>();
     }
 
     void Update()
     {
         base.Update();
 
-        if (showCore)
+        if (showCore && numberOfAliveComponents > 0)
         {
-            ShowCore();
-            numberOfDeadComponents++;
+            Debug.Log("showcore");
+            StartCoroutine(ShowCore());
+            numberOfAliveComponents--;
+            showCore = false;
         }
-
-        /*  if(other component health == 0)
-      {
-          StartCoroutine(ShowCore());
-      }*/
     }
 
     IEnumerator ShowCore()
     {
         coreShown = true;
-        //move protective mesh
+        Invincible(false);
+        SupportComponentsInvincible(true);
         yield return new WaitForSeconds(openCoreTime);
-        //move mesh back
+        Invincible(true);
+        SupportComponentsInvincible(false);
         coreShown = false;
+    }
+
+    private void SupportComponentsInvincible(bool input)
+    {
+        turretComponent.Invincible(input);
+        mortarComponent.Invincible(input);
+        flamethrowerComponent.Invincible(input);
     }
 
 }
