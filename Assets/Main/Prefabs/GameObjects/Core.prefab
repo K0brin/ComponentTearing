@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.17269, y: 0.17269, z: 0.17269}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7081738665082408826}
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528088828065790829}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -119,8 +119,8 @@ GameObject:
   - component: {fileID: 7081738665082408826}
   - component: {fileID: 1733235749309815132}
   - component: {fileID: 2549625813878364343}
-  - component: {fileID: 4639795154965050784}
   - component: {fileID: 1067711244207218208}
+  - component: {fileID: 6100888316152781563}
   m_Layer: 3
   m_Name: Core
   m_TagString: Core
@@ -137,8 +137,8 @@ Transform:
   m_GameObject: {fileID: 2947713725377894906}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.39312002, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: -0.011009, y: -0.095077, z: 0}
+  m_LocalScale: {x: 0.51541966, y: 0.52444, z: 0.52444}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2611014482857722226}
@@ -198,27 +198,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4639795154965050784
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2947713725377894906}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1067711244207218208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +215,28 @@ MonoBehaviour:
   healthSlider: {fileID: 4754832617254739901}
   sightArea: {fileID: 528088828065790829}
   showCore: 0
-  openCoreTime: 0
+  openCoreTime: 10
+--- !u!65 &6100888316152781563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2947713725377894906}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3895639287325118805
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -42,6 +42,15 @@ public class Components : MonoBehaviour
             Debug.Log("isdead");
             SupportComponentDied();
         }
+
+        if (invincible)
+        {
+            healthSlider.gameObject.SetActive(false);
+        }
+        else if (!invincible)
+        {
+            healthSlider.gameObject.SetActive(true);
+        }
     }
 
     public virtual void TakeDamage(float damage)

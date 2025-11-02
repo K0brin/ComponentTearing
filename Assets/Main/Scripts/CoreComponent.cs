@@ -38,6 +38,11 @@ public class CoreComponent : Components
             numberOfAliveComponents--;
             showCore = false;
         }
+
+        if (CoreIsDead())
+        {
+            //Game is Over
+        }
     }
 
     IEnumerator ShowCore()
@@ -46,6 +51,7 @@ public class CoreComponent : Components
         Invincible(false);
         SupportComponentsInvincible(true);
         yield return new WaitForSeconds(openCoreTime);
+        Debug.Log(openCoreTime);
         Invincible(true);
         SupportComponentsInvincible(false);
         coreShown = false;
@@ -56,6 +62,15 @@ public class CoreComponent : Components
         turretComponent.Invincible(input);
         mortarComponent.Invincible(input);
         flamethrowerComponent.Invincible(input);
+    }
+
+    private bool CoreIsDead()
+    {
+        if (currentHealth <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 
 }
