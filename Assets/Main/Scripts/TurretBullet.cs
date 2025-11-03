@@ -8,7 +8,6 @@ public class TurretBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("once");
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerController>()

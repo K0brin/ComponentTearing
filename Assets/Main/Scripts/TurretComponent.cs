@@ -28,7 +28,7 @@ public class TurretComponent : Components
 
       StartCoroutine(Shoot());
 
-      if (SeePlayer())
+      if (SeePlayer(false))
       {
          OrientToPlayer();
       }
@@ -55,7 +55,7 @@ public class TurretComponent : Components
    private IEnumerator Shoot()
    {
       //when sees player Shoot()
-      if (SeePlayer() && canShoot)
+      if (SeePlayer(false) && canShoot)
       {
          canShoot = false;
          //actual shoot script

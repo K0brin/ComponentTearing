@@ -6,7 +6,7 @@ public class CoreComponent : Components
 
     //TODO as core takes damage it will slow down robot
 
-    private bool coreShown;
+    public bool coreShown;
     public bool showCore;
     [SerializeField] private float openCoreTime;
     private int numberOfAliveComponents;
@@ -33,10 +33,16 @@ public class CoreComponent : Components
 
         if (showCore && numberOfAliveComponents > 0)
         {
-            Debug.Log("showcore");
             StartCoroutine(ShowCore());
             numberOfAliveComponents--;
             showCore = false;
+
+
+        }
+        else if(numberOfAliveComponents <= 0)
+        {
+            coreShown = true;
+            Invincible(false);
         }
 
         if (CoreIsDead())
@@ -55,6 +61,7 @@ public class CoreComponent : Components
         Invincible(true);
         SupportComponentsInvincible(false);
         coreShown = false;
+
     }
 
     private void SupportComponentsInvincible(bool input)

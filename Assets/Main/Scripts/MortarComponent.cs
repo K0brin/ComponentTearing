@@ -29,7 +29,7 @@ public class MortarComponent : Components
     void Update()
    {
       base.Update();
-      if (SeePlayer() && bCanSpawn)
+      if (SeePlayer(true) && bCanSpawn)
       {
          StartCoroutine(SpawnHitArea());
       }

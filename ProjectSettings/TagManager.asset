@@ -12,6 +12,8 @@ TagManager:
   - Flamethrower
   - Mortar
   - Turret
+  - Crosshair
+  - FireImage
   layers:
   - Default
   - TransparentFX

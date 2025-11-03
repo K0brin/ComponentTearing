@@ -68,37 +68,46 @@ public class Components : MonoBehaviour
         healthSlider.value = currentHealth / maxHealth;
     }
 
-    protected virtual bool SeePlayer()
+    protected virtual bool SeePlayer(bool isMortar)
     {
-        Collider[] objectsHit = Physics.OverlapBox(sightArea.transform.position, sightArea.transform.localScale / 2, Quaternion.identity);
-        for (int i = 0; i < objectsHit.Length; i++)
+        if (!coreComponent.coreShown)
         {
-            if (objectsHit[i].CompareTag("Player"))
+            Collider[] objectsHit = Physics.OverlapBox(sightArea.transform.position, sightArea.transform.localScale / 2, Quaternion.identity);
+            for (int i = 0; i < objectsHit.Length; i++)
             {
-                //use raycast to see if can see player; wall detection
-                //raycast to player position; if hit player 
-                RaycastHit hit;
-                Vector3 playerDir = (player.transform.position - transform.position).normalized;
-                if (Physics.Raycast(transform.position, playerDir, out hit, 6))
+                if (objectsHit[i].CompareTag("Player"))
+                {
+                    //use raycast to see if can see player; wall detection
+                    //raycast to player position; if hit player
+                    RaycastHit hit;
+                    Vector3 playerDir = (player.transform.position - transform.position).normalized;
+                    if (Physics.Raycast(transform.position, playerDir, out hit, 6))
+                    {
+                        return true;
+                    }
+                }
+                else if (isMortar)
                 {
                     return true;
                 }
             }
         }
         return false;
+        
     }
 
     private void SupportComponentDied()
     {
         shownCore = true;
         coreComponent.showCore = true;
-        Debug.Log("showCore = true");
+        Destroy(this.gameObject);
     }
 
     private bool IsDead()
     {
         if (currentHealth <= 0)
         {
+
             return true;
         }
         return false;

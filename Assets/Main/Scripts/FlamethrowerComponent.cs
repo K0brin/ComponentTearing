@@ -17,17 +17,20 @@ public class FlamethrowerComponent : Components
     [SerializeField] private float flameDamage = 10f;
     [SerializeField] private float secBetweenDamage = 0.5f;
     private bool canAttack;
+    private GameObject fireImage;
 
     void Start()
     {
         base.Start();
         canAttack = true;
+        fireImage = GameObject.FindGameObjectWithTag("FireImage");
+        fireImage.SetActive(false);
     }
 
     void Update()
     {
         base.Update();
-        if (SeePlayer())
+        if (SeePlayer(false))
         {
             Debug.Log("see's player");
             StartCoroutine(StartAttack());
@@ -58,9 +61,10 @@ public class FlamethrowerComponent : Components
             if (InAttackRange())
             {
                 playerController.TakeDamage(flameDamage);
+                fireImage.SetActive(true);
             }
             yield return new WaitForSeconds(secBetweenDamage);
-
+            fireImage.SetActive(false);
             canAttack = true;
         }
     }

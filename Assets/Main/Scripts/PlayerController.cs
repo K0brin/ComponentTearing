@@ -5,6 +5,7 @@ using StarterAssets;
 using Unity.VisualScripting;
 using UnityEditor;
 using System.Collections;
+using System.ComponentModel;
 public class PlayerController : MonoBehaviour
 {
     [Header("Health")]
@@ -14,8 +15,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float bowDamage;
     public PlayerInputs playerControls;
     private InputAction attack;
+    private InputAction aim;
 
     private Animator playerAnimator;
+    private bool canAttack;
+    private ThirdPersonController playerMovementController;
+    private bool aiming;
+    private GameObject crosshair;
 
 
     void Awake()
@@ -28,31 +34,46 @@ public class PlayerController : MonoBehaviour
         attack = playerControls.Player.Attack;
         attack.Enable();
         attack.performed += Attack;
+
+        aim = playerControls.Player.Aim;
+        aim.Enable();
+        aim.performed += Aim;
     }
 
     void OnDisable()
     {
         attack.Disable();
+        aim.Disable();
     }
 
     void Start()
     {
         playerAnimator = GetComponent<Animator>();
+        playerMovementController = GetComponent<ThirdPersonController>();
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        crosshair.SetActive(false);
 
         currentHealth = maxHealth;
         Mathf.Clamp(currentHealth, 0f, maxHealth);
         UpdateHealthBar();
+        canAttack = false;
+        aiming = false;
     }
 
     void Update()
     {
-        PlayerLookForward();
+        if (aiming)
+        {
+            crosshair.SetActive(true);
+            PlayerLookForward();
+        }
     }
 
     public void TakeDamage(float damageToTake)
     {
         currentHealth -= damageToTake;
         Mathf.Clamp(currentHealth, 0f, maxHealth);
+        StartCoroutine(RegenHealth());
         UpdateHealthBar();
     }
 
@@ -64,7 +85,24 @@ public class PlayerController : MonoBehaviour
     private void Attack(InputAction.CallbackContext context)
     {
         //attack function
-        playerAnimator.SetTrigger("Attack");
+        if (canAttack)
+        {
+            playerAnimator.SetTrigger("Attack");
+            canAttack = false;
+            aiming = false;
+            crosshair.SetActive(false);
+            playerMovementController.MoveSpeed = 4f;
+            playerMovementController.SprintSpeed = 4f;
+        }
+    }
+
+    private void Aim(InputAction.CallbackContext context)
+    {
+        playerAnimator.SetTrigger("Aim");
+        //disable movement
+        playerMovementController.MoveSpeed = 0f;
+        playerMovementController.SprintSpeed = 0f;
+        aiming = true;
     }
 
     private void PlayerLookForward()
@@ -95,6 +133,22 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Missed");
             }
+        }
+    }
+
+    public void CanAttack()
+    {
+        canAttack = true;
+    }
+
+    IEnumerator RegenHealth()
+    {
+        float storedHealth = currentHealth;
+        yield return new WaitForSeconds(5);
+        if(storedHealth == currentHealth)
+        {
+            currentHealth = maxHealth;
+            UpdateHealthBar();
         }
     }
 
