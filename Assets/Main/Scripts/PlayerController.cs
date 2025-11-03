@@ -2,11 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using StarterAssets;
-using Unity.VisualScripting;
-using UnityEditor;
 using System.Collections;
-using System.ComponentModel;
-using UnityEditor.SearchService;
 public class PlayerController : MonoBehaviour
 {
     [Header("Health")]
@@ -17,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInputs playerControls;
     private InputAction attack;
     private InputAction aim;
+    private InputAction quit;
 
     private Animator playerAnimator;
     private bool canAttack;
@@ -40,12 +37,17 @@ public class PlayerController : MonoBehaviour
         aim = playerControls.Player.Aim;
         aim.Enable();
         aim.performed += Aim;
+
+        quit = playerControls.Player.Quit;
+        quit.Enable();
+        quit.performed += Quit;
     }
 
     void OnDisable()
     {
         attack.Disable();
         aim.Disable();
+        quit.Disable();
     }
 
     void Start()
@@ -115,6 +117,11 @@ public class PlayerController : MonoBehaviour
         playerMovementController.MoveSpeed = 0f;
         playerMovementController.SprintSpeed = 0f;
         aiming = true;
+    }
+
+    private void Quit(InputAction.CallbackContext context)
+    {
+        Application.Quit();
     }
 
     private void PlayerLookForward()
