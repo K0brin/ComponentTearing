@@ -211,9 +211,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 400
+  maxHealth: 200
   healthSlider: {fileID: 4754832617254739901}
   sightArea: {fileID: 528088828065790829}
+  coreShown: 0
   showCore: 0
   openCoreTime: 10
 --- !u!65 &6100888316152781563

@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using System.Collections;
 using System.ComponentModel;
+using UnityEditor.SearchService;
 public class PlayerController : MonoBehaviour
 {
     [Header("Health")]
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private ThirdPersonController playerMovementController;
     private bool aiming;
     private GameObject crosshair;
+    private ScreenManager sceneManager;
 
 
     void Awake()
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        sceneManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<ScreenManager>();
         playerAnimator = GetComponent<Animator>();
         playerMovementController = GetComponent<ThirdPersonController>();
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
@@ -67,6 +70,15 @@ public class PlayerController : MonoBehaviour
             crosshair.SetActive(true);
             PlayerLookForward();
         }
+
+        if (IsDead())
+        {
+            sceneManager.LoseMenu.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Destroy(this.gameObject);
+        }
+
     }
 
     public void TakeDamage(float damageToTake)
@@ -145,11 +157,20 @@ public class PlayerController : MonoBehaviour
     {
         float storedHealth = currentHealth;
         yield return new WaitForSeconds(5);
-        if(storedHealth == currentHealth)
+        if (storedHealth == currentHealth)
         {
             currentHealth = maxHealth;
             UpdateHealthBar();
         }
+    }
+    
+    private bool IsDead()
+    {
+        if (currentHealth <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     void OnDrawGizmos()

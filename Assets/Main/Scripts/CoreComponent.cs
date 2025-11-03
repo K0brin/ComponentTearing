@@ -14,6 +14,7 @@ public class CoreComponent : Components
     private TurretComponent turretComponent;
     private MortarComponent mortarComponent;
     private FlamethrowerComponent flamethrowerComponent;
+    private ScreenManager screenManager;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class CoreComponent : Components
         turretComponent = GameObject.FindGameObjectWithTag("Turret").GetComponent<TurretComponent>();
         mortarComponent = GameObject.FindGameObjectWithTag("Mortar").GetComponent<MortarComponent>();
         flamethrowerComponent = GameObject.FindGameObjectWithTag("Flamethrower").GetComponent<FlamethrowerComponent>();
+        screenManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<ScreenManager>();
     }
 
     void Update()
@@ -47,7 +49,9 @@ public class CoreComponent : Components
 
         if (CoreIsDead())
         {
-            //Game is Over
+            screenManager.WinMenu.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 

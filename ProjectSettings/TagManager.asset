@@ -14,6 +14,7 @@ TagManager:
   - Turret
   - Crosshair
   - FireImage
+  - SceneManager
   layers:
   - Default
   - TransparentFX
